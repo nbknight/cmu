@@ -1,0 +1,47 @@
+---
+- name: Configure and install Pet Clinic App
+  hosts: virtualmachines
+  remote_user: root
+  
+  tasks:
+  # Update Apt
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+  # Install Git
+    - name: Install git
+      apt:
+        name: git
+        state: present
+  # Install Java
+    - name: Install OpenJDK 17
+      apt:
+        name: openjdk-17-jdk
+        state: present
+  # Install Maven
+    - name: Install Maven
+      apt:
+        name: maven
+        state: present
+  # Clone Pet Clinic Rep
+    - name: Clone Pet Clinic Repo
+      git:
+        repo: https://github.com/spring-projects/spring-petclinic.git
+        dest: /home/ubuntu/app
+        clone: yes
+        update: yes
+  # Compile the project with Maven
+    - name: Compile maven project
+      shell:
+        cmd: |
+          ./mvnw -X package > maven_build.log 2>&1
+        chdir: /home/ubuntu/app
+      
+  # Run the application
+    - name: Run Pet Clinic App
+      shell: nohup java -jar target/*.jar > /dev/null 2>&1 &
+      args:
+        chdir: /home/ubuntu/app
+      async: 10
+      poll: 0
