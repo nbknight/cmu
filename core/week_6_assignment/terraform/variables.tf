@@ -3,25 +3,15 @@ variable "region" {
   type        = string
   default     = "us-east-1"
 }
-variable "ansible_instance_type" {
+variable "instance_type" {
   description = "Type for the ansible instance"
   type        = string
   default     = "t3.large"
 }
-variable "ansible_instance_name" {
+variable "instance_name" {
   description = "Name for ansible ec2"
   type        = string
-  default     = "ansible"
-}
-variable "as_instance_type" {
-  description = "Type for the app server instance"
-  type        = string
-  default     = "t2.micro"
-}
-variable "as_instance_name" {
-  description = "Name for app server ec2"
-  type        = string
-  default     = "app-server"
+  default     = "central"
 }
 variable "key_name" {
   description = "Name for key"
