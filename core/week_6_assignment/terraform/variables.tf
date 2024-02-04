@@ -22,7 +22,7 @@ variable "key_name" {
 variable "volume_size" {
   description = "Volume size of instance"
   type        = number
-  default     = 14
+  default     = 20
 
 }
 variable "volume_type" {
