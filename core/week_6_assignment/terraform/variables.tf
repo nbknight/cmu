@@ -19,3 +19,15 @@ variable "key_name" {
   default     = "knight-cmu"
 
 }
+variable "volume_size" {
+  description = "Volume size of instance"
+  type        = number
+  default     = 14
+
+}
+variable "volume_type" {
+  description = "Type of volume"
+  type        = string
+  default     = "gp2"
+
+}
